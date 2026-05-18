@@ -4,5 +4,3 @@ __pycache__/
 .env
 *.csv
 *.parquet
-EOF
-:q!
