@@ -9,8 +9,8 @@ logging.basicConfig(
 )
 
 # Load cleaned data from previous step
-df = pd.read_csv("data/cleaned_comments.csv")
-logging.info(f"Loaded {len(df)} records from cleaned_comments.csv")
+df = pd.read_csv("data/raw_comments.csv")
+logging.info(f"Loaded {len(df)} records from raw_comments.csv")
 
 # Create SQLite database engine - creates a local database file
 # No server or password needed - perfect for development
