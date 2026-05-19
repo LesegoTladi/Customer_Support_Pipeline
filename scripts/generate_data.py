@@ -67,6 +67,17 @@ api_df['created_at'] = [fake.date_time_between(
 # Add source column to track where each record came from
 api_df['source'] = 'API'
 
+# Fill missing user details in API records with realistic fake data
+api_df['username'] = api_df['username'].apply(
+    lambda x: fake.user_name() if pd.isna(x) else x
+)
+api_df['full_name'] = api_df['full_name'].apply(
+    lambda x: fake.name() if pd.isna(x) else x
+)
+api_df['user_id'] = api_df['user_id'].apply(
+    lambda x: random.randint(1, 500) if pd.isna(x) else x
+)
+
 # High priority flag - now safe to apply because priority column exists
 api_df['high_priority_flag'] = api_df['priority'].apply(
     lambda x: 1 if x in ['High', 'Critical'] else 0
@@ -149,9 +160,15 @@ synthetic_df['high_priority_flag'] = synthetic_df['priority'].apply(
 combined_df = pd.concat([api_df, synthetic_df], ignore_index=True)
 logging.info(f"Combined dataset total: {len(combined_df)} records")
 
+# Display all columns without truncation
+pd.set_option('display.max_columns', None)
+pd.set_option('display.width', None)
+
 # Preview first 5 rows
 print(combined_df.head())
 
 # Save combined dataset
 combined_df.to_csv("data/raw_comments.csv", index=False)
 logging.info("Combined dataset saved to data/raw_comments.csv")
+
+print(combined_df.isnull().sum())
