@@ -26,3 +26,20 @@ GrOUP BY sla_flag
 sla_df =pd.read_sql(sla_query,engine)
 logging.info("SLA FLag Breakdown:")
 print(sla_df)
+
+
+# Query 2 — Top 10 Most Engaged Users 
+users_query = """
+    SELECT 
+        username,
+        full_name,
+        SUM(likes_count) AS total_likes,
+        COUNT(comment_id) AS total_comments
+    FROM customer_support_comments
+    GROUP BY username, full_name
+    ORDER BY total_likes DESC
+    LIMIT 10
+"""
+users_df = pd.read_sql(users_query, engine)
+logging.info("Top 10 Most Engaged Users:")
+print(users_df)
