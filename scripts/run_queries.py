@@ -72,7 +72,7 @@ category_df = pd.read_sql(category_query, engine)
 logging.info("Tickets By Category:")
 print(category_df)
 
-# Query 5 — Priority Breakdown 
+# Query 5 —Priority Breakdown 
 priority_query = """
     SELECT 
         priority,
