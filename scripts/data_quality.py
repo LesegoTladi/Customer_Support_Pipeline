@@ -56,10 +56,9 @@ print(df['sentiment'].value_counts())
 print(df['source'].value_counts())
 
 #Check for outliers and unepected ranges
-print(df[['likes_counts', 'comment_length', 'is_engaged', 'high_priority_flag']].describe())
+print(df[['likes_count', 'comment_length', 'is_engaged', 'high_priority_flag']].describe())
 # Flag records where likes_count is unsually high
-likes_outliers = df[df['likes_counts']>45]
-print(f"Total outliers: {len(likes_outliers)}")
+likes_outliers = df[df['likes_count']>45]
 
 # Ensure all dates fall within expected range
 df['created_at'] = pd.to_datetime(df['created_at'])
