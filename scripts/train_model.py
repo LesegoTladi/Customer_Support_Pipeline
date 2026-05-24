@@ -16,7 +16,7 @@ logging.basicConfig(
 )
 
 #Load the combined dataset
-df =pd.csv('/workspaces/Customer_Support_Pipeline/data/raw_comments.csv')
+df =pd.read_csv('/workspaces/Customer_Support_Pipeline/data/raw_comments.csv')
 print(f"Loaded {len(df)} records for model training")
 
 # Feature Selection
