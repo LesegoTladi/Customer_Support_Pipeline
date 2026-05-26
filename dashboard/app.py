@@ -113,4 +113,32 @@ with col2:
     )
     st.plotly_chart(fig, use_container_width=True)
 
-    
+# Row 2 Charts 
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Tickets By Category")
+    category_counts = filtered_df['category'].value_counts().reset_index()
+    category_counts.columns = ['category', 'count']
+    fig = px.bar(
+        category_counts,
+        x='count',
+        y='category',
+        orientation='h',
+        color='count',
+        color_continuous_scale='Blues'
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
+with col2:
+    st.subheader("Sentiment Distribution")
+    sentiment_counts = filtered_df['sentiment'].value_counts().reset_index()
+    sentiment_counts.columns = ['sentiment', 'count']
+    fig = px.pie(
+        sentiment_counts,
+        names='sentiment',
+        values='count',
+        color_discrete_sequence=['#3498db', '#95a5a6', '#e74c3c']
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
