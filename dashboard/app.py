@@ -142,3 +142,33 @@ with col2:
     )
     st.plotly_chart(fig, use_container_width=True)
 
+# Row 3 Charts 
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Tickets By Channel")
+    channel_counts = filtered_df['channel'].value_counts().reset_index()
+    channel_counts.columns = ['channel', 'count']
+    fig = px.bar(
+        channel_counts,
+        x='channel',
+        y='count',
+        color='channel',
+        color_discrete_sequence=px.colors.qualitative.Pastel
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
+with col2:
+    st.subheader("Top Agents By Tickets Handled")
+    agent_counts = filtered_df['agent_name'].value_counts().reset_index()
+    agent_counts.columns = ['agent_name', 'count']
+    fig = px.bar(
+        agent_counts,
+        x='count',
+        y='agent_name',
+        orientation='h',
+        color='count',
+        color_continuous_scale='Greens'
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
